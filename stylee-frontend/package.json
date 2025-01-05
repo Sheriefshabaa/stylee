@@ -1,0 +1,11 @@
+{
+  "name": "stylee-frontend",
+  "version": "1.0.0",
+  "description": "simple UI for simple e-commerce App by Angular",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sherif Shaaban",
+  "license": "ISC"
+}
