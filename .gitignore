@@ -7,7 +7,7 @@
 /dataSources/
 /dataSources.local.xml
 #Environment variables
-/.env
+/stylee-backend/.env
 # Node modules
 /stylee-backend/node_modules
 #idea related data
