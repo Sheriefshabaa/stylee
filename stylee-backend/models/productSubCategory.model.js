@@ -8,6 +8,10 @@ const productSubCategorySchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    sub_category_image: {
+        type: String,
+        required: true
     }
 }, {timestamps: true})
-module.exports = mongoose.model('ProductSubCategory',productSubCategorySchema);
+module.exports = mongoose.model('ProductSubCategory', productSubCategorySchema);

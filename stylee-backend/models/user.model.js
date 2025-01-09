@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        alias:'_id'
+        alias: '_id'
     },
     first_name: {
         type: String,
@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    email: { //this needs validation
         type: String,
         required: true,
         unique: true
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     userType: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserType',
-        required:true
+        required: true
     }
 
 })

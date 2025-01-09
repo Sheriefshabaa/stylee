@@ -4,7 +4,10 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT;
 const cors = require('cors');
-const connectDB = require('./config/db.config')
+const connectDB = require('./config/db.config');
+//routers declaration
+const userTypeRouter = require('./routers/userType.router');
+const userRouter = require('./routers/user.router');
 // Data Transmission Configs
 /*Database Connection Initialization*/
 connectDB();
@@ -14,6 +17,9 @@ app.use(express.json())
 app.use(cors({
     origin: process.env.FRONT_URI
 }))
+//setup routers
+app.use('/userType', userTypeRouter);
+app.use('/user', userRouter);
 // Port Listening Configs for back-end server:
 app.listen(port, () => {
     console.log(`back-end is running at port: ${port}`);
