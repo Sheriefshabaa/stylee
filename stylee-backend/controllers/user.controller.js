@@ -4,6 +4,15 @@ const userTypeModel = require('../models/user.model');
 const {hashPassword, isMatch} = require('../utilities/hashing.utili');
 const {generateAccessToken} = require("../utilities/authentication.utili");
 
+/**
+ * Registers a new user.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} req.body - The body of the request.
+ * @param {string} req.body.password - The password of the user to be hashed.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves to void.
+ */
 exports.registerUser = async (req, res) => {
     try {
         //to prevent the creation of non-existed types.
@@ -20,6 +29,15 @@ exports.registerUser = async (req, res) => {
 
 }
 //TODO: In the front, I shall to make sure that the sent data contains an Object ID, I will embed them in the .env file
+/**
+ * Registers a new user as an admin.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} req.body - The body of the request.
+ * @param {string} req.body.password - The password of the user to be hashed.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves to void.
+ */
 exports.register = async (req, res) => { // for Admins
     try {
         //to prevent the creation of non-existed types.
@@ -35,21 +53,34 @@ exports.register = async (req, res) => { // for Admins
 
 }
 
+/**
+ * Logs in a user.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} req.body - The body of the request.
+ * @param {string} req.body.email - The email of the user.
+ * @param {string} req.body.password - The password of the user.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves to void.
+ */
 exports.login = async (req, res) => {
     try {
         const {email, password} = req.body;
-        const loggedInUser = userModel.findOne({email}).populate('UserType');
+
+        //The problem is in fetching data from the request, solution: Y 3m use (await) abos edaak
+        const loggedInUser = await userModel.findOne({email}).populate('userType').lean();
         if (loggedInUser) {
             const hasValidCredentials = await isMatch(password, loggedInUser.password);
+            console.log("Credentials status: " + hasValidCredentials);
             console.log("Things worked fine - Pt.1");
             if (hasValidCredentials) {
                 const userToken = generateAccessToken({
-                    user_id: loggedInUser.user_id,
+                    user_id: loggedInUser._id,
                     userType: loggedInUser.userType.role_type,
                     first_name: loggedInUser.first_name,
                 });
                 console.log("Things worked fine - Pt.2");
-                res.status(200).json({Access_token: userToken})
+                res.status(200).json({access_token: userToken, loggedInUser: loggedInUser})
             } else {
                 res.status(401).json({Error: "Invalid Credentials, please correct username and password"});
             }
@@ -60,6 +91,6 @@ exports.login = async (req, res) => {
 
     } catch
         (err) {
-        res.status(500).json({Error: `Operation Login Failed, + ${err.message}`})
+        res.status(500).json({Error: `Operation Login Failed, ${err.message}`})
     }
 }

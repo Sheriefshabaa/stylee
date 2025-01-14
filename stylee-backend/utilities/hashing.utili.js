@@ -15,5 +15,14 @@ exports.hashPassword = async (password) => {
 
 
 exports.isMatch = async (password, savedPassword) => {
-    return await bcrypt.compare(password, savedPassword);
+    if (!password) {
+        throw new Error('Password is missing');
+    }
+    try {
+        const isMatched = await bcrypt.compare(password, savedPassword);
+        return isMatched
+    } catch (err) {
+        throw new Error(`Error verifying the password: ${err.message}`);
+    }
+
 }

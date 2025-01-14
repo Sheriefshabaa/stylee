@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
     },
     order_status: {
         type: String,
-        enum: ['in-cart', 'pending', 'shipped', 'delivered', 'cancelled'],
+        enum: ['in-cart', 'pending', 'in-fulfillment', 'shipped', 'delivered', 'cancelled'],
         required: true
     },
     total: {

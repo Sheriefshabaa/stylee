@@ -20,3 +20,7 @@
 # Temporary files
 *.tmp
 *.swp
+#images
+DB-Modified-Schema.png
+#txt files
+/stylee-backend/users.txt
