@@ -20,4 +20,7 @@ productRouter.put('/mark-as-out-of-stock/:name', authorizeRole('Admin'), product
 // Route to update the stock items count of a product
 productRouter.put('/update-stock/:name', authorizeRole('Admin'), productController.updateStockItemsCount);
 
+// Route to get all products
+productRouter.get('/all', productController.getAllProducts);
+
 module.exports = productRouter;

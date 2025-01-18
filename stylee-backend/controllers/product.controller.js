@@ -18,7 +18,7 @@ exports.createProduct = async (req, res) => {
 exports.markProductAsDeleted = async (req, res) => {
     try {
         const productName = req.params.name;
-        const product = await productModel.findOne({product_name: productName});
+        const product = await productModel.findOne({product_name: productName}).lean();
 
         if (!product) {
             return res.status(404).json({message: 'Product not found'});
@@ -26,10 +26,10 @@ exports.markProductAsDeleted = async (req, res) => {
 
         product.is_deleted = true;
         product.stock_items_count = 0;
-        await product.save();
+        //await product.save();
         res.status(200).json({message: 'Product marked as deleted and stock count reset', product});
     } catch (error) {
-        res.status(500).json({message: 'Server error', error});
+        res.status(500).json({message: 'Server error', Error: error.message});
     }
 };
 
@@ -37,7 +37,7 @@ exports.markProductAsDeleted = async (req, res) => {
 exports.deactivateProductIfOutOfStock = async (req, res) => {
     try {
         const productName = req.params.name;
-        const product = await productModel.findOne({product_name: productName});
+        const product = await productModel.findOne({product_name: productName}).lean();
 
         if (!product) {
             return res.status(404).json({message: 'Product not found'});
@@ -45,7 +45,7 @@ exports.deactivateProductIfOutOfStock = async (req, res) => {
 
         if (product.stock_items_count === 0) {
             product.is_active = false;
-            await product.save();
+            //await product.save();
             res.status(200).json({message: 'Product deactivated due to zero stock', product});
         } else {
             res.status(200).json({message: 'Product is still in stock', product});
@@ -67,7 +67,7 @@ exports.markProductAsOutOfStock = async (req, res) => {
 
         product.is_in_stock = false;
 
-        await product.save();
+        //await product.save();
         res.status(200).json({message: 'Product marked as out of stock', product});
     } catch (error) {
         res.status(500).json({message: 'Server error', error});
@@ -86,9 +86,19 @@ exports.updateStockItemsCount = async (req, res) => {
 
         product.stock_items_count = newStockCount;
 
-        await product.save();
+        //await product.save();
         res.status(200).json({message: 'Stock items count updated', product});
     } catch (error) {
         res.status(500).json({message: 'Server error', error});
+    }
+};
+
+// Function to get all products
+exports.getAllProducts = async (req, res) => {
+    try {
+        const products = await productModel.find({}).populate(['category_ref', 'sub_category_ref']);
+        res.status(200).json({ message: 'Products retrieved successfully', products });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
