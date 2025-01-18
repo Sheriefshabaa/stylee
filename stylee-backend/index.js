@@ -10,6 +10,7 @@ const userTypeRouter = require('./routers/userType.router');
 const userRouter = require('./routers/user.router');
 const productCategoryRouter = require('./routers/productCategory.router');
 const productSubCategoryRouter = require('./routers/productSubCategory.router');
+const productRouter = require('./routers/product.router');
 // Data Transmission Configs
 /*Database Connection Initialization*/
 connectDB();
@@ -24,6 +25,7 @@ app.use('/userType', userTypeRouter);
 app.use('/user', userRouter);
 app.use('/productCategory', productCategoryRouter);
 app.use('/productSub-category', productSubCategoryRouter);
+app.use('/product', productRouter);
 
 
 // Port Listening Configs for back-end server:

@@ -14,15 +14,15 @@ const uploadProductSubCategoryImage = multer({storage: productSubCategoryStorage
 
 //configure storage for products images
 const productStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination:  (req, file, cb) => {
         cb(null, process.env.PRODUCTS_IMAGES_PATH);
     },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`)
+    filename:  (req, file, cb) => {
+         cb(null, `${Date.now()}-${file.originalname}`)
     }
 
 })
-const uploadProductImage = multer({productStorage});
+const uploadProductImage = multer({storage: productStorage});
 
 
 module.exports = {uploadProductImage, uploadProductSubCategoryImage}

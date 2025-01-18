@@ -24,3 +24,44 @@
 DB-Modified-Schema.png
 #txt files
 /stylee-backend/users.txt
+# Angular Ignored files
+
+# Compiled output
+/stylee-frontend/dist
+/stylee-frontend/tmp
+/stylee-frontend/out-tsc
+/stylee-frontend/bazel-out
+
+# Node
+/stylee-frontend/node_modules
+/stylee-frontend/npm-debug.log
+/stylee-frontend/yarn-error.log
+
+# IDEs and editors
+/stylee-frontend/.idea/
+/stylee-frontend/.project
+/stylee-frontend/.classpath
+/stylee-frontend/.c9/
+/stylee-frontend/*.launch
+/stylee-frontend/.settings/
+/stylee-frontend/*.sublime-workspace
+
+# Visual Studio Code
+/stylee-frontend/.vscode/*
+/stylee-frontend/!.vscode/settings.json
+/stylee-frontend/!.vscode/tasks.json
+/stylee-frontend/!.vscode/launch.json
+/stylee-frontend/!.vscode/extensions.json
+/stylee-frontend/.history/*
+# Miscellaneous
+/stylee-frontend/.angular/cache
+/stylee-frontend/.sass-cache/
+/stylee-frontend/connect.lock
+/stylee-frontend/coverage
+/stylee-frontend/libpeerconnection.log
+/stylee-frontend/testem.log
+/stylee-frontend/typings
+
+# System files
+/stylee-frontend/.DS_Store
+/stylee-frontend/Thumbs.db

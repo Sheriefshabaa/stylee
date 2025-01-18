@@ -1,6 +1,5 @@
 // Database Instance for userScheme,
 const userModel = require('../models/user.model');
-const userTypeModel = require('../models/user.model');
 const {hashPassword, isMatch} = require('../utilities/hashing.utili');
 const {generateAccessToken} = require("../utilities/authentication.utili");
 
@@ -72,14 +71,12 @@ exports.login = async (req, res) => {
         if (loggedInUser) {
             const hasValidCredentials = await isMatch(password, loggedInUser.password);
             console.log("Credentials status: " + hasValidCredentials);
-            console.log("Things worked fine - Pt.1");
             if (hasValidCredentials) {
                 const userToken = generateAccessToken({
                     user_id: loggedInUser._id,
                     userType: loggedInUser.userType.role_type,
                     first_name: loggedInUser.first_name,
                 });
-                console.log("Things worked fine - Pt.2");
                 res.status(200).json({access_token: userToken, loggedInUser: loggedInUser})
             } else {
                 res.status(401).json({Error: "Invalid Credentials, please correct username and password"});

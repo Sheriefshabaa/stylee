@@ -23,7 +23,7 @@ A graduation project for MEAN stack diploma provided by NTI, under the supervisi
     - you can find the PID, then terminate the process that uses the port to use it. `taskkill /PID <PID> /F`
 - As a best practice the status code `204` is the best one to send in your `delete` requests
 - When you deal with "multer", it's proper to create the directory that you will interact with before sending the
-  request
-  that will save the data in this directory
--
-- 
+  request that will save the data in this directory
+- make the content of the static pages (i.e. About) comes from database
+- You still have a problem with product creation, (returns 500, filename issue)
+- fix the sidebar issue (overlapping with the footer)

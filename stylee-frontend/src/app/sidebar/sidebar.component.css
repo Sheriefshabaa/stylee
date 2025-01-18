@@ -1,0 +1,36 @@
+.sidebar {
+  width: 250px;
+  height: calc(100vh - 60px); /* Adjust height considering header height (60px here) */
+  background-color: #601AA2;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 47px; /* Adjust to match your header height */
+  left: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.sidebar ul li a:hover {
+  color: #ddd;
+}
