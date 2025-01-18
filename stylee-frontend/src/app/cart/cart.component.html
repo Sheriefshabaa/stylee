@@ -1,1 +1,26 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <h1>Your Cart</h1>
+  <div *ngIf="cartItems?.length > 0; else emptyCart">
+    <div class="cart-item" *ngFor="let item of cartItems">
+      <img [src]="item.image" alt="{{ item.name }}" class="product-image"/>
+      <div class="product-details">
+        <h2>{{ item.name }}</h2>
+        <p>Unit Price: {{ item.price | currency }}</p>
+        <div class="quantity-controls">
+          <button (click)="updateQuantity(item, -1)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)=  "updateQuantity(item, 1)">+</button>
+        </div>
+        <p>Total: {{ item.price * item.quantity | currency }}</p>
+      </div>
+      <button class="remove-btn" (click)="removeItem(item)">Remove</button>
+    </div>
+    <div class="cart-total">
+      <h3>Total Amount: {{ getTotalAmount() | currency }}</h3>
+      <button class="checkout-btn" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+  <ng-template #emptyCart>
+    <p class="empty-message">Your cart is empty. Start adding products!</p>
+  </ng-template>
+</div>
